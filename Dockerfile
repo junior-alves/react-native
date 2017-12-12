@@ -45,10 +45,7 @@ RUN \
 
 # Install watchman
 RUN \
-	apt-get install -qy python-dev git automake \
-	&& git clone https://github.com/facebook/watchman.git \
-	&& cd watchman && git checkout v4.7.0 && ./autogen.sh && ./configure && make && make install \
-	&& rm -rf watchman
+	apt-get install -qy python-dev libc6-i386 libncurses5 libstdc++6 libbz2-1.0
 
 # Install Basic React-Native packages
 RUN \
