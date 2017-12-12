@@ -2,6 +2,8 @@ version: "3"
 
 services:
     react-native:
+        environment:
+            - USER_HOST=${USER}
         build: ./
         container_name: react-native
         ports:

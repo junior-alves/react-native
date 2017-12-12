@@ -63,9 +63,11 @@ RUN \
 
 EXPOSE 5038
 
-VOLUME ["/project"]
+WORKDIR /project
+
+COPY ./entrypoint.sh /bin/entrypoint.sh
 
 RUN \
-	chmod -R 777 /project
+	chmod +x /bin/entrypoint.sh
 
-WORKDIR /project
+ENTRYPOINT /bin/entrypoint.sh; bash
