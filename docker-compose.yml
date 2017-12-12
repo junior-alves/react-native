@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+    react-native:
+        build: ./
+        container_name: react-native
+        ports:
+            - "80"
+        volumes:
+            - /dev/bus/usb:/dev/bus/usb
+            - ./project:/project
+        restart: unless-stopped
+        tty: true
+        privileged: true
+volumes:
+  data:
+    driver: "local"
