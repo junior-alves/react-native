@@ -4,10 +4,9 @@ MAINTAINER Júnior Alves <jr290488@gmail.com>
 
 # Setup environment variables
 ENV ANDROID_ADB_SERVER_PORT=5038
-ENV GRADLE_USER_HOME /app/android/gradle_deps
+# ENV GRADLE_USER_HOME /app/android/gradle_deps
 
 ENV PATH $PATH:node_modules/.bin
-#ENV JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64"
 ENV PATH=$JAVA_HOME/bin:$PATH
 
 ## Set correct environment variables.
@@ -22,7 +21,8 @@ RUN \
 	&& apt-get --assume-yes install build-essential libssl-dev software-properties-common
 
 RUN \
-	curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh -o install.sh | bash install.sh
+	curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+	&& apt-get --assume-yes install nodejs
 
 ## Install SDK
 ENV ANDROID_HOME /usr/local/android-sdk-linux
@@ -45,7 +45,7 @@ RUN \
 
 # Install watchman
 RUN \
-	apt-get install -qy build-essential git automake \
+	apt-get install -qy python-dev git automake \
 	&& git clone https://github.com/facebook/watchman.git \
 	&& cd watchman && git checkout v4.7.0 && ./autogen.sh && ./configure && make && make install \
 	&& rm -rf watchman
