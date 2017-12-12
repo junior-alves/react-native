@@ -20,10 +20,6 @@ RUN \
 	apt-get update \
 	&& apt-get --assume-yes install build-essential libssl-dev software-properties-common
 
-RUN \
-	curl -sL https://deb.nodesource.com/setup_8.x | bash - \
-	&& apt-get --assume-yes install nodejs
-
 ## Install SDK
 ENV ANDROID_HOME /usr/local/android-sdk-linux
 RUN \
@@ -45,7 +41,11 @@ RUN \
 
 # Install watchman
 RUN \
-	apt-get install -qy python-dev libc6-i386 libncurses5 libstdc++6 libbz2-1.0
+	apt-get install -qy python-dev lib32stdc++6 lib32z1 lib32z1-dev
+
+RUN \
+	curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+	&& apt-get --assume-yes install nodejs
 
 # Install Basic React-Native packages
 RUN \
