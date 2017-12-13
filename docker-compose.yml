@@ -3,11 +3,13 @@ version: "3"
 services:
     react-native:
         environment:
+            - REACT_NATIVE_PACKAGER_HOSTNAME=192.168.25.8
             - USER_HOST=${USER}
         build: ./
         container_name: react-native
         ports:
-            - "80"
+            - "8081:8081"
+            - "19000:19000"
         volumes:
             - /dev/bus/usb:/dev/bus/usb
             - ./project:/project

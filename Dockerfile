@@ -39,13 +39,19 @@ RUN \
 	(while true ; do sleep 5; echo y; done) | android update sdk --no-ui --force --all --filter platform-tools,android-23,build-tools-23.0.1,extra-android-support,extra-android-m2repository,sys-img-x86_64-android-23,extra-google-m2repository
 
 
+# Install Node
+RUN \
+	curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+	&& apt-get --assume-yes install nodejs
+
+
 # Install watchman
 RUN \
-	apt-get install -qy python-dev lib32stdc++6 lib32z1 lib32z1-dev
+	apt-get install -qy python-dev lib32stdc++6 lib32z1 lib32z1-dev automake autoconf \
+	&& git clone https://github.com/facebook/watchman.git \
+	&& cd watchman && git checkout v4.7.0 && ./autogen.sh && ./configure && make && make install \
+	&& rm -rf watchman
 
-RUN \
-	curl -sL https://deb.nodesource.com/setup_8.x | bash - \
-	&& apt-get --assume-yes install nodejs
 
 # Install Basic React-Native packages
 RUN \
