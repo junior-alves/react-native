@@ -76,4 +76,8 @@ COPY ./entrypoint.sh /bin/entrypoint.sh
 RUN \
 	chmod +x /bin/entrypoint.sh
 
+ENV ANDROID_EMULATOR_FORCE_32BIT true
+ENV ANDROID_SDK_HOME=$ANDROID_HOME
+ENV ANDROID_AVD_HOME=/root
+
 ENTRYPOINT /bin/entrypoint.sh; bash
