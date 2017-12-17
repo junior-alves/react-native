@@ -47,19 +47,23 @@ RUN \
 
 # Install watchman
 RUN \
-	apt-get install -qy python-dev lib32stdc++6 lib32z1 lib32z1-dev automake autoconf \
-	&& git clone https://github.com/facebook/watchman.git \
-	&& cd watchman && git checkout v4.7.0 && ./autogen.sh && ./configure && make && make install \
-	&& rm -rf watchman
+	apt-get install -qy python-dev lib32stdc++6 lib32z1 lib32z1-dev automake autoconf libtool
+
+RUN \
+	git clone https://github.com/facebook/watchman.git \
+	&& cd watchman && git checkout v4.7.0 && ./autogen.sh && ./configure && make && make install
+
+# Install yarn
+RUN \
+	curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+	&& echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+	&& apt-get update && apt-get -qy install yarn
 
 
 # Install Basic React-Native packages
 RUN \
-	npm install -g create-react-native-app \
-	&& npm install -g react-native-cli
-
-RUN \
-	npm install rnpm -g
+	npm install -g react-native-cli \
+	&& npm install rnpm -g 
 
 ## Clean up when done
 RUN \
