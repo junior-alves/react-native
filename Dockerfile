@@ -35,11 +35,11 @@ RUN \
 # Install android tools and system-image.
 ENV PATH $PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/23.0.1
 
-RUN \
-	(while true ; do sleep 5; echo y; done) | android update sdk --no-ui --force --all --filter platform-tools,android-25,build-tools-25.0.1,extra-android-support,extra-android-m2repository,sys-img-x86_64-android-25,extra-google-m2repository
+# RUN \
+# 	(while true ; do sleep 5; echo y; done) | android update sdk --no-ui --force --all --filter platform-tools,android-25,build-tools-25.0.1,extra-android-support,extra-android-m2repository,sys-img-x86_64-android-25,extra-google-m2repository
 
 RUN \
-	android update adb
+	(while true ; do sleep 5; echo y; done) | android update sdk --no-ui --force --all --filter platform-tools,android-23,build-tools-23.0.1,android-25,build-tools-25.0.1,extra-android-support,extra-android-m2repository,sys-img-x86_64-android-23,sys-img-x86_64-android-25,extra-google-m2repository
 
 
 # Install Node
@@ -61,6 +61,14 @@ RUN \
 	curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 	&& echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
 	&& apt-get update && apt-get -qy install yarn
+
+# Install gradle
+ENV PATH=$PATH:/opt/gradle/gradle-3.4.1/bin
+RUN \
+	cd /tmp/ \
+	&& wget https://services.gradle.org/distributions/gradle-3.4.1-bin.zip \
+	&& mkdir /opt/gradle \
+	&& unzip -d /opt/gradle gradle-3.4.1-bin.zip
 
 
 # Install Basic React-Native packages
