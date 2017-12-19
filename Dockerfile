@@ -39,7 +39,7 @@ ENV PATH $PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/bu
 # 	(while true ; do sleep 5; echo y; done) | android update sdk --no-ui --force --all --filter platform-tools,android-25,build-tools-25.0.1,extra-android-support,extra-android-m2repository,sys-img-x86_64-android-25,extra-google-m2repository
 
 RUN \
-	(while true ; do sleep 5; echo y; done) | android update sdk --no-ui --force --all --filter platform-tools,android-23,build-tools-23.0.1,android-25,build-tools-25.0.1,extra-android-support,extra-android-m2repository,sys-img-x86_64-android-23,sys-img-x86_64-android-25,extra-google-m2repository
+	(while true ; do sleep 5; echo y; done) | android update sdk --no-ui --force --all --filter platform-tools,android-23,build-tools-23.0.1,android-25,build-tools-25.0.3,extra-android-support,extra-android-m2repository,sys-img-x86_64-android-23,sys-img-x86_64-android-25,extra-google-m2repository
 
 
 # Install Node
